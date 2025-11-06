@@ -95,7 +95,7 @@ const AnimatedCityBg = () => {
       />
       {/* === Car on glowing road === */}
       <div
-        className="absolute bottom-[5vh] left-80 z-28 w-[20vw] max-w-[250px] pointer-events-none"
+        className="absolute bottom-[5vh] md:left-80 left-[120px] z-28 md:w-[15vw] w-50 max-w-[250px] pointer-events-none"
         style={{
           transform: "translateX(-50%) translateZ(120px) scale(1.1)", // slight 3D forward depth
         }}
