@@ -5,6 +5,7 @@ import GlassTimer from "./components/GlassTimer";
 import Navbar from "./components/Navbar";
 import EventsSection from "./pages/EventSection";
 import GlimpseSection from "./pages/GlimpseSection";
+import AboutSection from "./pages/AboutSection";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </div>
         </div>
       </div>
+      <AboutSection />
       <GlimpseSection />
       <EventsSection />
     </>

@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useRef } from "react";
 import {
   motion,
@@ -124,7 +123,7 @@ const EventsSection = () => {
   return (
     <section
       id="events"
-      className="relative py-16 md:py-24 bg-transparent text-white overflow-hidden z-[999] select-none"
+      className="relative mb-32 py-16 md:py-24 bg-transparent text-white overflow-hidden z-[999] select-none"
       style={{
         WebkitUserSelect: "none",
         userSelect: "none",
