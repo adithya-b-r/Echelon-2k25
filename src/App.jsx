@@ -62,61 +62,63 @@ function App() {
     );
   };
 
-  // === PRELOAD VIDEO STRONG MODE (60 → 100%) ===
   const preloadVideo = (src) => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
+
       video.src = src;
       video.preload = "auto";
       video.muted = true;
       video.playsInline = true;
-      video.style.display = "none";
+      video.crossOrigin = "anonymous";
+      video.style.position = "absolute";
+      video.style.opacity = "0";
+      video.style.pointerEvents = "none";
+
       document.body.appendChild(video);
 
-      let canPlay = false;
-      let dataLoaded = false;
+      let frameRendered = false;
 
-      const tryFinish = () => {
-        if (canPlay && dataLoaded) {
-          document.body.removeChild(video);
-          setProgress(100);
-          resolve();
-        }
+      // Called only when the FIRST REAL FRAME is decoded + painted
+      const onFrame = () => {
+        frameRendered = true;
+        setProgress(100);
+        document.body.removeChild(video);
+        resolve();
       };
 
-      // Fired when browser determines enough can be played
-      video.addEventListener("canplaythrough", () => {
-        canPlay = true;
-        setProgress(80);
-        tryFinish();
-      });
+      // If browser supports requestVideoFrameCallback
+      if ("requestVideoFrameCallback" in HTMLVideoElement.prototype) {
+        video.requestVideoFrameCallback(onFrame);
+      }
 
-      // Fired when first frames are decoded
-      video.onloadeddata = () => {
-        dataLoaded = true;
-        setProgress(90);
-        tryFinish();
-      };
-
-      // Start loading
+      // Trigger video load
       video.load();
 
-      // EXTREMELY IMPORTANT: fallback timeout
-      setTimeout(() => {
-        if (!canPlay || !dataLoaded) {
-          console.warn("Video preload timed out → Forcing ready state");
-          document.body.removeChild(video);
-          setProgress(100);
-          resolve();
+      // Start playback (required for some devices)
+      video.play().catch(() => {});
+
+      // TRUE fallback — keep loader until frame is painted
+      const fallback = setInterval(() => {
+        if (video.readyState >= 2 && !frameRendered) {
+          // readyState >= 2 means enough data to play first frame
+          onFrame();
+          clearInterval(fallback);
         }
-      }, 6000);
+      }, 200);
+
+      // Hard fallback after long wait but WITHOUT skipping the frame
+      setTimeout(() => {
+        if (!frameRendered) {
+          console.warn("Video slow → waiting for first frame...");
+        }
+      }, 8000);
     });
   };
 
   useEffect(() => {
     const loadAll = async () => {
       const imageList = [
-        "/scooter.png",
         "/thicklogo.png",
         "/sditlogo.png",
         ...events.map((e) => e.img),
