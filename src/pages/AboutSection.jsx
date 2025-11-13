@@ -11,7 +11,10 @@ export default function AboutSection() {
   };
 
   return (
-    <div id="about" className="w-full min-h-screen backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl rounded-2xl px-6 py-14 md:px-20 flex flex-col gap-12">
+    <div
+      id="about"
+      className="w-full min-h-screen backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl pt-30 rounded-2xl px-6 py-14 md:px-20 flex flex-col gap-12"
+    >
       {/* Title */}
       <motion.h1
         variants={fadeUp}

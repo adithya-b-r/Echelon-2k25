@@ -137,9 +137,9 @@ const Sidebars = () => {
       </div>
 
       {/* === Right Social Sidebar === */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[9999] hidden md:flex">
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-9999 hidden md:flex">
         <div
-          className="w-[70px] h-[320px] rounded-3xl 
+          className="w-[70px] h-[280px] rounded-3xl 
           bg-[rgba(15,15,25,0.7)] border border-[rgba(255,255,255,0.15)]
           backdrop-blur-2xl shadow-[inset_0_0_20px_rgba(255,255,255,0.05),0_0_20px_rgba(0,255,255,0.1)]
           flex flex-col items-center justify-center space-y-6 text-white"

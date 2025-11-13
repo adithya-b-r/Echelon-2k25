@@ -101,21 +101,23 @@ const events = [
 // ANIMATION VARIANTS
 const leftVariants = {
   hidden: { opacity: 0, x: -150 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
 };
 const centerVariants = {
   hidden: { opacity: 0, y: 150 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9 } },
 };
 const rightVariants = {
   hidden: { opacity: 0, x: 150 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
 };
 
 const scooterVariants = {
   hidden: { opacity: 0, x: "-200%" },
+
   visible: {
     opacity: 1,
+
     x: 0,
     transition: { type: "spring", stiffness: 60, damping: 12 },
   },
@@ -152,17 +154,62 @@ export default function EventSection() {
     <div
       ref={sectionRef}
       id="events"
-      className="w-full py-20 md:py-28 flex flex-col items-center relative overflow-hidden
+      className="w-full pt-30 py-20 md:py-28 flex flex-col items-center relative overflow-hidden
       bg-transparent [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"
     >
-      {/* BACKGROUND TITLE */}
-      <h1
-        className="absolute top-20 left-1/2 -translate-x-1/2 
-        text-[60px] md:text-[180px] lg:text-[240px] 
-        font-extrabold text-white/5 uppercase pointer-events-none select-none"
-      >
-        EVENTS
-      </h1>
+      {/* BACKGROUND FLOATING EVENTS TEXT */}
+      <div className="absolute inset-0 z-0 flex flex-col items-center justify-start pt-10 pointer-events-none select-none">
+        {/* FIRST TEXT — LEFT SIDE ENTRY */}
+        <motion.h1
+          variants={leftVariants}
+          initial="hidden"
+          animate={leftAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+
+        {/* SECOND TEXT — CENTER FADE-UP */}
+        <motion.h1
+          variants={centerVariants}
+          initial="hidden"
+          animate={centerAnim}
+          className="text-white/4 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+
+        {/* THIRD TEXT — RIGHT SIDE ENTRY */}
+        <motion.h1
+          variants={rightVariants}
+          initial="hidden"
+          animate={rightAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+        <motion.h1
+          variants={centerVariants}
+          initial="hidden"
+          animate={centerAnim}
+          className="text-white/4 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+        <motion.h1
+          variants={rightVariants}
+          initial="hidden"
+          animate={rightAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+      </div>
 
       {/* TITLE */}
       <div className="mb-12 md:mb-20 z-10">
@@ -230,25 +277,70 @@ export default function EventSection() {
   );
 }
 
-// EVENT CIRCLE
+// EVENT CIRCLE — GLOSSY GLASS STYLE
 function EventCircle({ ev, onClick }) {
   return (
     <div className="flex flex-col items-center text-center">
       <motion.div
-        whileHover={{ scale: 1.07 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
-        className="w-24 h-24 md:w-44 md:h-44 rounded-full border-4 border-red-500
-        shadow-[0_0_18px_rgba(255,80,80,0.4)] overflow-hidden cursor-pointer"
+        className="
+          relative group
+          w-24 h-24 md:w-44 md:h-44
+          rounded-full cursor-pointer
+          transition-all duration-300
+        "
       >
+        {/* GLASS BORDER */}
+        <div
+          className="
+            absolute inset-0 rounded-full 
+            bg-white/10 backdrop-blur-xl
+            border border-white/30
+            shadow-[0_0_15px_rgba(255,255,255,0.15),inset_0_0_12px_rgba(255,255,255,0.25)]
+          "
+        ></div>
+
+        {/* SHINY HIGHLIGHT */}
+        <div
+          className="
+            absolute -top-1 -left-1 
+            w-10 h-10 md:w-20 md:h-20 
+            rounded-full 
+            bg-white/40 blur-xl
+            opacity-60 rotate-12
+          "
+        ></div>
+
+        {/* INNER GLOW */}
+        <div
+          className="
+            absolute inset-0 rounded-full 
+            shadow-[0_0_25px_rgba(255,80,80,0.45)]
+          "
+        ></div>
+
+        {/* IMAGE */}
         <img
           src={ev.img}
           alt={ev.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-full relative z-10"
         />
       </motion.div>
 
-      <p className="text-white mt-2 md:mt-3 text-xs md:text-lg font-semibold w-28 md:w-44 leading-tight">
+      {/* NAME UNDER CIRCLE */}
+      <p
+        className="
+    text-white mt-2 md:mt-3 
+    text-[10px] md:text-lg font-semibold 
+    leading-tight 
+    w-24 md:w-44 
+    h-8 md:h-[50px] 
+    flex items-center justify-center 
+    text-center
+  "
+      >
         {ev.title}
       </p>
     </div>
@@ -262,34 +354,136 @@ function EventModal({ event, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-xl flex items-center justify-center p-6"
+      className="fixed inset-0 z-999 bg-black/70 backdrop-blur-xl flex items-center justify-center p-6"
       onClick={onClose}
     >
+      {/* MODAL CARD */}
       <motion.div
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.7, opacity: 0 }}
-        className="bg-white/10 border border-white/20 rounded-3xl p-8 max-w-xl text-white shadow-2xl"
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="
+          relative bg-white/10 border border-white/20 rounded-3xl 
+          p-8 max-w-xl w-full text-white shadow-2xl backdrop-blur-2xl
+        "
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-3xl font-bold">{event.title}</h2>
-        <p className="text-purple-300 italic">{event.subtitle}</p>
-
-        <p className="mt-3">{event.participants}</p>
-
-        <h3 className="mt-4 font-semibold">Guidelines:</h3>
-        {event.guidelines.map((g, i) => (
-          <p key={i}>• {g}</p>
-        ))}
-
-        <h3 className="mt-4 font-semibold">Coordinators:</h3>
-        {event.coordinators.map((c, i) => (
-          <p key={i}>{c}</p>
-        ))}
-
-        <button className="mt-6 px-6 py-2 rounded-lg bg-red-600 hover:bg-red-700 font-bold tracking-wide">
-          Register
+        {/* BACK BUTTON */}
+        <button
+          onClick={onClose}
+          className="
+            absolute top-4 left-4 
+            px-3 py-1.5 
+            text-sm font-semibold
+            rounded-lg
+            bg-white/20 hover:bg-white/30
+            border border-white/30
+            backdrop-blur-xl
+            transition
+            z-99999
+          "
+        >
+          ❮ Back
         </button>
+
+        {/* CONTENT WRAPPER */}
+        <motion.div
+          initial={{ opacity: 0, filter: "blur(14px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="pt-10"
+        >
+          <h2 className="text-3xl font-bold text-center">{event.title}</h2>
+          <p className="text-purple-300 italic text-center text-lg mt-1">
+            {event.subtitle}
+          </p>
+
+          <p className="mt-4 text-center text-white/90">{event.participants}</p>
+
+          {/* SCROLLABLE CONTENT */}
+          <div
+            className="
+              mt-6 max-h-50 overflow-y-auto pr-2
+              custom-scrollbar
+            "
+          >
+            {/* GUIDELINES */}
+            <h3 className="font-semibold text-xl mb-2">Guidelines:</h3>
+
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    delayChildren: 0.3,
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              {event.guidelines.map((g, i) => (
+                <motion.p
+                  key={i}
+                  className="mb-1"
+                  variants={{
+                    hidden: { opacity: 0, x: -10, filter: "blur(4px)" },
+                    show: { opacity: 1, x: 0, filter: "blur(0px)" },
+                  }}
+                >
+                  • {g}
+                </motion.p>
+              ))}
+            </motion.div>
+
+            {/* COORDINATORS */}
+            <h3 className="font-semibold text-xl mt-5 mb-2">Coordinators:</h3>
+
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    delayChildren: 0.3,
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              {event.coordinators.map((c, i) => (
+                <motion.p
+                  key={i}
+                  className="mb-1"
+                  variants={{
+                    hidden: { opacity: 0, x: -10, filter: "blur(4px)" },
+                    show: { opacity: 1, x: 0, filter: "blur(0px)" },
+                  }}
+                >
+                  {c}
+                </motion.p>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* REGISTER BUTTON */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.05 }}
+            className="
+              mt-8 px-6 py-3 w-full 
+              rounded-lg bg-red-600 hover:bg-red-700 
+              font-bold tracking-wide text-center
+            "
+          >
+            Register
+          </motion.button>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

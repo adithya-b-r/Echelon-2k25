@@ -9,7 +9,8 @@ const Navbar = () => {
         fixed top-0 left-0 w-full
         h-16 sm:h-20 lg:h-24
         px-4 sm:px-6 md:px-6
-        flex items-center justify-between
+        py-2 md:py-3
+        flex flex-col md:flex-row items-center justify-between
         transition-all duration-300
         z-9999
       "
@@ -44,7 +45,7 @@ const Navbar = () => {
         </h1>
       </div>
 
-      <div className="flex items-center">
+      <div className="md:flex items-center hidden ">
         <GlassTimer targetDate="2025-11-30T23:59:59" />
       </div>
     </div>

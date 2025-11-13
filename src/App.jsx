@@ -1,7 +1,6 @@
 import AnimatedCityBg from "./components/AnimatedCityBg";
 import Logo from "./assets/thicklogo.png";
 import Sidebars from "./components/Sidebars";
-import GlassTimer from "./components/GlassTimer";
 import Navbar from "./components/Navbar";
 import EventsSection from "./pages/EventSection";
 import GlimpseSection from "./pages/GlimpseSection";
@@ -14,7 +13,7 @@ function App() {
         <Navbar />
         <AnimatedCityBg />
         <Sidebars />
-        <div className="fixed inset-0 z-0 flex flex-col items-center justify-center text-white space-y-6">
+        <div className="fixed overflow-hidden inset-0 z-0 flex flex-col items-center justify-center text-white space-y-6">
           {/* Logo */}
           <div className="flex items-center justify-center">
             <img
@@ -25,7 +24,7 @@ function App() {
           </div>
 
           {/* Buttons Section */}
-          <div className="flex items-center gap-3 md:gap-5 mt-4">
+          <div className="flex md:flex-row flex-col items-center gap-3 md:gap-5 mt-4">
             {/* REGISTER BUTTON (neon, responsive, same height as offer) */}
             <button
               className="
@@ -39,7 +38,7 @@ function App() {
               text-white
 
               /* Red neon gradient */
-              bg-gradient-to-r from-red-600 via-red-500 to-red-700
+              bg-linear-to-r from-red-600 via-red-500 to-red-700
 
               /* Outer neon glow */
               shadow-[0_0_15px_rgba(255,60,60,0.7),0_0_30px_rgba(255,40,40,0.6)]
@@ -58,14 +57,14 @@ function App() {
               <span
                 className="
               absolute inset-0 opacity-20 
-              bg-gradient-to-br from-white/10 to-transparent
+              bg-linear-to-br from-white/10 to-transparent
   "
               ></span>
 
               {/* Moving shimmer */}
               <span
                 className="
-                absolute inset-0 bg-gradient-to-r 
+                absolute inset-0 bg-linear-to-r 
                 from-transparent via-white/25 to-transparent 
                 translate-x-[-100%] group-hover:translate-x-[100%]
                 transition-all duration-700
@@ -91,7 +90,7 @@ function App() {
     py-2
     flex flex-col justify-center
     rounded-xl 
-    bg-gradient-to-br from-[#d4af37] via-[#b88a2c] to-[#e1c16e]
+    bg-linear-to-br from-[#d4af37] via-[#b88a2c] to-[#e1c16e]
     backdrop-blur-xl
     border border-yellow-300/40
     shadow-[0_0_15px_rgba(255,215,0,0.5),0_0_30px_rgba(255,200,50,0.4),inset_0_0_12px_rgba(255,255,255,0.3)]
@@ -103,7 +102,7 @@ function App() {
               <span
                 className="
       absolute inset-0 
-      bg-gradient-to-r from-transparent via-white/40 to-transparent
+      bg-linear-to-r from-transparent via-white/40 to-transparent
       translate-x-[-150%]
       animate-[shine_2.5s_linear_infinite]
     "

@@ -11,7 +11,10 @@ const AnimatedCityBg = () => {
   }, []);
 
   return (
-    <div id="home" className="relative w-full h-screen overflow-hidden">
+    <div
+      id="home"
+      className="relative w-full h-screen overflow-hidden select-none"
+    >
       <video
         ref={videoRef}
         src="/bg.mp4"
