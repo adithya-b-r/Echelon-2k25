@@ -27,7 +27,7 @@ const Navbar = () => {
   "
       >
         <img
-          src={logo}
+          src={"/sditlogo.png"}
           alt="Logo"
           className="
       w-8 h-8

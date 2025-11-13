@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import GradientText from "@/components/GradientText";
 
 // EVENTS DATA
 const events = [
@@ -7,7 +8,7 @@ const events = [
     title: "FINZO (FINANCE)",
     subtitle: "Quick trades, Big gains",
     participants: "Participants: 2 make a team.",
-    img: "/finzo.jpg",
+    img: "/Finance .JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -19,7 +20,7 @@ const events = [
     title: "HIREKART (HR)",
     subtitle: "Enrich, Engage, Empower",
     participants: "Participants: 2 make a team.",
-    img: "/hirekart.jpg",
+    img: "/Hrlogo.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -31,7 +32,7 @@ const events = [
     title: "MARK-IT (MARKETING EVENT)",
     subtitle: "Where speed meets success",
     participants: "Participants: 2 make a team.",
-    img: "/markit.jpg",
+    img: "/Marketing.PNG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -46,7 +47,7 @@ const events = [
     title: "RapidOPS (BMT)",
     subtitle: "Optimize, Organise, Outstand",
     participants: "Participants: 3 make a team.",
-    img: "/rapidops.jpg",
+    img: "/BMT.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -58,7 +59,7 @@ const events = [
     title: "ZEPBOSS (BEST MANAGER)",
     subtitle: "One blink, One bold decision",
     participants: "Participants: Individual event",
-    img: "/zepboss.jpg",
+    img: "/BM.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -70,7 +71,7 @@ const events = [
     title: "BizzBasket (BUSINESS QUIZ)",
     subtitle: "Strategy in every pick",
     participants: "Participants: 2 make a team.",
-    img: "/bizzbasket.jpg",
+    img: "/BQ.png",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -82,7 +83,7 @@ const events = [
     title: "InstaPitch (SPARK TANK)",
     subtitle: "Think. Pitch. Win.",
     participants: "Participants: 2 make a team.",
-    img: "/instapitch.jpg",
+    img: "/Spark Tank.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
       "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
@@ -92,57 +93,122 @@ const events = [
   },
 ];
 
-// --------------------------------------------
-// EVENT SECTION
-// --------------------------------------------
+// ANIMATION VARIANTS
+const leftColumn = {
+  hidden: { opacity: 0, x: -120 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+};
+const centerColumn = {
+  hidden: { opacity: 0, y: 120 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+const rightColumn = {
+  hidden: { opacity: 0, x: 120 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7 } },
+};
+const scooterVariants = {
+  hidden: { opacity: 0, x: "-200%" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { type: "spring", stiffness: 60, damping: 12 },
+  },
+};
 
+// MAIN COMPONENT
 export default function EventSection() {
   const [selected, setSelected] = useState(null);
+
+  // Animation controls for mobile fix
+  const leftControls = useAnimation();
+  const centerControls = useAnimation();
+  const rightControls = useAnimation();
+
+  // Force animations to run on mount (fix for real mobile devices)
+  useEffect(() => {
+    leftControls.start("visible");
+    centerControls.start("visible");
+    rightControls.start("visible");
+  }, []);
 
   return (
     <div
       id="events"
-      className="w-full py-24 flex flex-col items-center bg-linear-to-b from-[#0A0B1D] via-[#1A1030] to-[#3A134A]"
+      className="w-full py-20 md:py-28 flex flex-col items-center relative overflow-hidden
+      bg-transparent [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"
     >
-      {/* TITLE */}
-      <h1 className="text-white text-4xl font-bold mb-16 tracking-wide">
-        Events
+      {/* BG Title */}
+      <h1
+        className="absolute top-20 left-1/2 -translate-x-1/2 
+        text-[60px] md:text-[180px] lg:text-[240px] 
+        font-extrabold text-white/5 tracking-widest select-none pointer-events-none uppercase"
+      >
+        EVENTS
       </h1>
 
-      {/* GRID */}
-      <div className="grid grid-cols-3 gap-y-20 w-full max-w-5xl">
-        {/* LEFT COLUMN */}
-        <div className="flex flex-col items-center gap-20">
-          {events.slice(0, 3).map((ev, i) => (
-            <EventCircle
-              key={i}
-              ev={ev}
-              index={i}
-              onClick={() => setSelected(ev)}
-            />
-          ))}
-        </div>
+      {/* Front Title */}
+      <div className="mb-10 md:mb-16 z-10">
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          className="text-3xl md:text-5xl font-bold"
+        >
+          Management Events
+        </GradientText>
+      </div>
 
-        {/* CENTER */}
-        <div className="flex flex-col items-center mt-20">
-          <EventCircle
-            ev={events[3]}
-            index={3}
-            onClick={() => setSelected(events[3])}
+      {/* GRID — SAME 3-COLUMN FORMAT, SHRINKS ON MOBILE */}
+      <div className="grid grid-cols-3 gap-y-5 md:gap-y-20 gap-x-2 w-full max-w-5xl z-10">
+        {/* LEFT COLUMN */}
+        <motion.div
+          variants={leftColumn}
+          initial="hidden"
+          animate={leftControls}
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="flex flex-col items-center gap-8 md:gap-20"
+        >
+          {events.slice(0, 3).map((ev, i) => (
+            <EventCircle key={i} ev={ev} onClick={() => setSelected(ev)} />
+          ))}
+        </motion.div>
+
+        {/* CENTER COLUMN */}
+        <motion.div
+          variants={centerColumn}
+          initial="hidden"
+          animate={centerControls}
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="flex flex-col items-center mt-6 md:mt-20"
+        >
+          <motion.img
+            src="/scooter.png"
+            alt="Scooter"
+            variants={scooterVariants}
+            initial="hidden"
+            animate={centerControls}
+            whileInView="visible"
+            viewport={{ amount: 0.3 }}
+            className="w-28 md:w-56 mb-10 drop-shadow-[0_0_20px_rgba(255,60,60,0.6)]"
           />
-        </div>
+
+          <EventCircle ev={events[3]} onClick={() => setSelected(events[3])} />
+        </motion.div>
 
         {/* RIGHT COLUMN */}
-        <div className="flex flex-col items-center gap-20">
+        <motion.div
+          variants={rightColumn}
+          initial="hidden"
+          animate={rightControls}
+          whileInView="visible"
+          viewport={{ amount: 0.3 }}
+          className="flex flex-col items-center gap-8 md:gap-20"
+        >
           {events.slice(4).map((ev, i) => (
-            <EventCircle
-              key={i + 4}
-              ev={ev}
-              index={i + 4}
-              onClick={() => setSelected(ev)}
-            />
+            <EventCircle key={i} ev={ev} onClick={() => setSelected(ev)} />
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* MODAL */}
@@ -155,47 +221,35 @@ export default function EventSection() {
   );
 }
 
-// --------------------------------------------
-// 1. EVENT CIRCLE (with stagger animation)
-// --------------------------------------------
-
-function EventCircle({ ev, onClick, index }) {
+// EVENT CIRCLE
+function EventCircle({ ev, onClick }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5, y: 40 }}
-      whileInView={{
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        transition: {
-          duration: 0.7,
-          ease: "easeOut",
-          delay: index * 0.15,
-        },
-      }}
-      viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ scale: 1.07 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onClick}
-      className="
-        w-40 h-40 md:w-48 md:h-48 
-        rounded-full border-4 border-red-500 cursor-pointer 
-        overflow-hidden shadow-[0_0_18px_rgba(255,80,80,0.4)]
-      "
-    >
-      <img
-        src={ev.img}
-        alt={ev.title}
-        className="w-full h-full object-cover rounded-full"
-      />
-    </motion.div>
+    <div className="flex flex-col items-center text-center">
+      <motion.div
+        whileHover={{ scale: 1.07 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={onClick}
+        className="
+          w-24 h-24 md:w-44 md:h-44 
+          rounded-full border-4 border-red-500 cursor-pointer 
+          overflow-hidden shadow-[0_0_18px_rgba(255,80,80,0.4)]
+        "
+      >
+        <img
+          src={ev.img}
+          alt={ev.title}
+          className="w-full h-full object-cover rounded-full"
+        />
+      </motion.div>
+
+      <p className="text-white mt-2 md:mt-3 text-xs md:text-lg font-semibold leading-tight w-24 md:w-44">
+        {ev.title}
+      </p>
+    </div>
   );
 }
 
-// --------------------------------------------
-// 2. EVENT DETAILS MODAL
-// --------------------------------------------
-
+// EVENT MODAL
 function EventModal({ event, onClose }) {
   return (
     <motion.div
@@ -209,10 +263,7 @@ function EventModal({ event, onClose }) {
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.7, opacity: 0 }}
-        className="
-          bg-white/10 border border-white/20 
-          rounded-3xl p-8 max-w-xl text-white shadow-2xl
-        "
+        className="bg-white/10 border border-white/20 rounded-3xl p-8 max-w-xl text-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-3xl font-bold">{event.title}</h2>
