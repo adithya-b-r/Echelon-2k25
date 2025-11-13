@@ -2,51 +2,39 @@ import React from "react";
 import CircularGallery from "@/components/CircularGallery";
 
 const GlimpseSection = () => {
-  // 👇 Custom images & captions
   const items = [
     {
       image: "Glimpse1.JPG",
-      text: "Inauguration",
     },
     {
       image: "Glimpse2.JPG",
-      text: "Teamwork",
     },
     {
       image: "Glimpse3.JPG",
-      text: "Moments",
     },
     {
       image: "Glimpse4.JPG",
-      text: "Leadership",
     },
     {
       image: "Glimpse5.JPG",
-      text: "Creativity",
     },
     {
       image: "Glimpse6.JPG",
-      text: "Winners",
     },
     {
       image: "Glimpse7.JPG",
-      text: "Teamwork",
     },
     {
       image: "Glimpse8.jpg",
-      text: "Moments",
     },
     {
       image: "Glimpse9.JPG",
-      text: "Leadership",
     },
     {
       image: "Glimpse10.JPG",
-      text: "Creativity",
     },
     {
       image: "Glimpse11.JPG",
-      text: "Winners",
     },
   ];
 
@@ -70,7 +58,7 @@ const GlimpseSection = () => {
         border border-[rgba(255,255,255,0.15)]
         shadow-[0_0_25px_rgba(0,255,255,0.3)]"
       >
-        Glimpse of Echelon
+        Glimpse of MBA Department
       </h1>
 
       {/* Circular Gallery */}

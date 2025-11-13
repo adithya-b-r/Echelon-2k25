@@ -24,9 +24,9 @@ function App() {
           </div>
         </div>
       </div>
-      <AboutSection />
       <GlimpseSection />
       <EventsSection />
+      <AboutSection />
     </>
   );
 }

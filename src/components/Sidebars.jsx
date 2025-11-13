@@ -59,26 +59,30 @@ const navItems = [
   },
 ];
 
-// === Social Icons (optional external links) ===
+// === Social Icons (with proper brand colors) ===
 const socialItems = [
   {
-    icon: <Globe size={22} color="#e1306c" />,
+    // Globe (use a neutral blue)
+    icon: <Globe size={22} color="rgb(0, 249, 246)" />,
+    glow: "rgba(0,149,246,0.6)",
+    link: "#",
+  },
+  {
+    // Instagram gradient base pink
+    icon: <Instagram size={22} color="rgb(225,48,108)" />,
     glow: "rgba(225,48,108,0.6)",
     link: "#",
   },
   {
-    icon: <Instagram size={22} color="#e1306c" />,
-    glow: "rgba(225,48,108,0.6)",
+    // Facebook blue
+    icon: <Facebook size={22} color="rgb(24,119,242)" />,
+    glow: "rgba(24,119,242,0.6)",
     link: "#",
   },
   {
-    icon: <Facebook size={22} color="#e1306c" />,
-    glow: "rgba(225,48,108,0.6)",
-    link: "#",
-  },
-  {
-    icon: <Linkedin size={22} color="#e1306c" />,
-    glow: "rgba(225,48,108,0.6)",
+    // LinkedIn blue
+    icon: <Linkedin size={22} color="rgb(10,202,194)" />,
+    glow: "rgba(10,102,194,0.6)",
     link: "#",
   },
 ];
@@ -135,7 +139,7 @@ const Sidebars = () => {
       {/* === Right Social Sidebar === */}
       <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[9999] hidden md:flex">
         <div
-          className="w-[70px] h-[420px] rounded-3xl 
+          className="w-[70px] h-[320px] rounded-3xl 
           bg-[rgba(15,15,25,0.7)] border border-[rgba(255,255,255,0.15)]
           backdrop-blur-2xl shadow-[inset_0_0_20px_rgba(255,255,255,0.05),0_0_20px_rgba(0,255,255,0.1)]
           flex flex-col items-center justify-center space-y-6 text-white"
