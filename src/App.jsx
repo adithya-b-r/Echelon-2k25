@@ -109,17 +109,21 @@ const events = [
 
 function App() {
   const [isReady, setIsReady] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  // Preload all images
   const preloadImages = (arr) => {
+    let loaded = 0;
     return Promise.all(
       arr.map(
         (src) =>
           new Promise((resolve) => {
             const img = new Image();
             img.src = src;
-            img.onload = resolve;
-            img.onerror = resolve;
+            img.onload = img.onerror = () => {
+              loaded++;
+              setProgress(Math.floor((loaded / arr.length) * 50)); // images = 50%
+              resolve();
+            };
           })
       )
     );
@@ -128,15 +132,36 @@ function App() {
   const preloadVideo = (src) => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
+
       video.src = src;
       video.preload = "auto";
-      video.oncanplaythrough = resolve;
-      video.onerror = resolve;
+      video.muted = true;
+      video.playsInline = true;
+      video.style.display = "none";
+
+      document.body.appendChild(video);
+
+      let triggered = false;
+
+      const finish = () => {
+        if (!triggered) {
+          triggered = true;
+          document.body.removeChild(video);
+          setProgress(100); // video = next 50%
+          resolve();
+        }
+      };
+
+      video.addEventListener("playing", finish);
+
+      video.onloadeddata = () => {
+        video.play().catch(() => finish());
+      };
     });
   };
 
   useEffect(() => {
-    const preloadAll = async () => {
+    const load = async () => {
       const imageList = [
         "/scooter.png",
         "/thicklogo.png",
@@ -146,19 +171,15 @@ function App() {
       ];
 
       await preloadImages(imageList);
-
       await preloadVideo("/bg.mp4");
 
       setIsReady(true);
     };
 
-    preloadAll();
+    load();
   }, []);
 
-  if (!isReady) {
-    return <AppLoader />;
-  }
-
+  if (!isReady) return <AppLoader progress={progress} />;
   return (
     <>
       <div className="relative w-full h-screen">
