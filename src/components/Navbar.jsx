@@ -38,7 +38,7 @@ const Navbar = () => {
           transition-all duration-300
     "
         />
-        <h1 className="text-white font-semibold text-lg sm:text-xl md:text-2xl tracking-wide">
+        <h1 className="text-white font-semibold text-sm sm:text-xl md:text-2xl tracking-wide">
           SHREE DEVI INSTITUTE OF TECHNOLOGY
         </h1>
       </div>

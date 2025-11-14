@@ -40,7 +40,7 @@ const GlimpseSection = () => {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center py-16 md:py-24"
+      className="relative h-screen bg-black/80 backdrop-blur-xl border-t border-white/10 flex flex-col items-center justify-center py-16 md:py-24"
       style={{
         height: "700px",
         zIndex: 50,
@@ -64,11 +64,12 @@ const GlimpseSection = () => {
       {/* Circular Gallery */}
       <div className="w-full h-full flex justify-center">
         <CircularGallery
-          items={items} // ✅ Pass your custom images here
+          items={items}
           bend={1}
           textColor="#ffffff"
           borderRadius={0.05}
-          scrollEase={0.02}
+          scrollEase={0.15}
+          scrollSpeed={5}
         />
       </div>
     </div>

@@ -8,6 +8,7 @@ import AboutSection from "./pages/AboutSection";
 import AppLoader from "./components/AppLoader";
 import GlassTimer from "./components/GlassTimer";
 import GlassTimerVertical from "./components/GlassTimerVertical";
+import Footer from "./components/Footer";
 
 // EVENTS DATA
 const events = [
@@ -147,6 +148,9 @@ function App() {
 
         {/* HERO SECTION */}
         <div className="fixed overflow-hidden inset-0 z-0 flex flex-col items-center justify-center text-white space-y-6">
+          <div className="md:hidden relative -mt-7 -mb-3">
+            <GlassTimerVertical targetDate="2025-12-03T09:00:00" />
+          </div>
           <div className="flex items-center justify-center">
             <img
               src={"/thicklogo.png"}
@@ -171,12 +175,9 @@ function App() {
             📅 DECEMBER 3rd - 4th 2025
           </span>
 
-          <div className="md:hidden absolute top-20 ">
-            <GlassTimerVertical targetDate="2025-12-03T09:00:00" />
-          </div>
-          <div className="flex md:flex-row flex-col items-center gap-3 md:gap-5 mt-4">
+          <div className="flex md:flex-row flex-col items-center justify-center gap-3 md:gap-5 mt-4">
             <button
-              className="group relative overflow-hidden px-6 md:px-8 h-[60px] md:h-[70px]
+              className="group relative overflow-hidden -mt-7 px-6 md:px-8 h-[60px] md:h-[70px]
               flex items-center justify-center rounded-xl text-base md:text-xl font-extrabold
               uppercase text-white bg-linear-to-r from-red-600 via-red-500 to-red-700
               shadow-[0_0_15px_rgba(255,60,60,0.7)] border border-red-300/40 backdrop-blur-xl
@@ -220,6 +221,7 @@ function App() {
         <EventsSection />
         <AboutSection />
         <GlimpseSection />
+        <Footer />
       </div>
     </>
   );
