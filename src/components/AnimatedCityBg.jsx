@@ -17,7 +17,7 @@ const AnimatedCityBg = () => {
     >
       <video
         ref={videoRef}
-        src="/bg.mp4"
+        src="/video.mp4"
         autoPlay
         loop
         muted
