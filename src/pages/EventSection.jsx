@@ -18,7 +18,7 @@ const events = [
     bg: "/FinanceBG.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop, calculator and a stable Wi-Fi connection.",
     ],
     coordinators: ["Sadhvi – 8296614411", "Gaurav Kotian – 8050798759"],
@@ -31,7 +31,7 @@ const events = [
     bg: "/HRBG.JPG",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a stable Wi-Fi connection.",
     ],
     coordinators: ["Bhimambika – 9606661682", "Prajna K P – 9611020196"],
@@ -44,7 +44,7 @@ const events = [
     bg: "/MarketingBG.png",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop and a stable Wi-Fi connection.",
     ],
     coordinators: [
@@ -60,7 +60,7 @@ const events = [
     bg: "/BMTBG.jpg",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop and a stable Wi-Fi connection.",
     ],
     coordinators: ["Dhananjay – 8722802212", "Nishana – 9353264949"],
@@ -68,12 +68,12 @@ const events = [
   {
     title: "ZEPBOSS (BEST MANAGER)",
     subtitle: "One blink, One bold decision",
-    participants: "Participants: Individual event",
+    participants: "Participant: Individual event",
     img: "/BM.JPG",
     bg: "/BMBG.png",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop and a stable Wi-Fi connection.",
     ],
     coordinators: ["Shiny S Devadiga – 9901442039", "Deevika B R – 7019347069"],
@@ -86,7 +86,7 @@ const events = [
     bg: "/BQBG.jpg",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop and a stable Wi-Fi connection.",
     ],
     coordinators: ["Awab Shaikh – 7022173912", "Fathima Nawal – 7022024815"],
@@ -99,7 +99,7 @@ const events = [
     bg: "/SparkTankBG.jpg",
     guidelines: [
       "This event is open to both UG and PG students.",
-      "Only ₹180 per person! Use code ECHELON25 and grab your Early Bird Offer now!",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
       "Participants must have a laptop and a stable Wi-Fi connection.",
     ],
     coordinators: ["Shahil Shetty – 7619631140", "Navya Alva – 9740944317"],
@@ -107,7 +107,7 @@ const events = [
 ];
 
 // ANIMATION VARIANTS
-const leftVariants = {
+const leftVariants = {  
   hidden: { opacity: 0, x: -150 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
 };

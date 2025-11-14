@@ -28,9 +28,9 @@ const RulesSection = () => {
   const managementRules = [
     "Any number of participants from a college can participate for the event.",
     "The event is open to both UG and PG students.",
-    "Registration fee: ₹180 per participant. (Register before Nov 30 to get Early Bird discount of ₹150!)",
-    "Participants should carry laptops, calculators, net setters, pen drives etc.",
-    "Organizers are not responsible for providing any items.",
+    "Registration fee: ₹180 per participant. (Register on or before Nov 30th to get Early Bird discount of ₹150)",
+    "Participants should carry laptop, calculator, net setter, pen drive etc.",
+    "The organisers will not be liable for the provision of any items.",
     "Judges' & organizers' decision will be final and binding.",
     "Teams using unfair means will be disqualified.",
     "Participants must use the college code allotted by the Echelon team.",
@@ -45,7 +45,7 @@ const RulesSection = () => {
     "3 events → ₹250 (Aurora Access)",
     "4 events → ₹300 (Trident Access)",
     "Judges' & organizers' decision will be final and binding.",
-    "Unfair practices lead to disqualification.",
+    "Teams using unfair means will be disqualified.",
     "Participants must use the college code allotted by the Echelon team.",
   ];
 

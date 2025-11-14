@@ -50,55 +50,6 @@ export default function FeaturingSection() {
 
       {/* CARD WRAPPER */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full px-6">
-        {/* ================= CARD 1 ================= */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={1}
-          viewport={{ once: false }}
-          className="
-            relative w-[90%] md:w-[360px] 
-            bg-[rgba(20,20,35,0.75)] 
-            backdrop-blur-2xl border border-white/10 
-            rounded-3xl p-5 
-            shadow-[0_0_25px_rgba(0,200,255,0.15)]
-            hover:shadow-[0_0_35px_rgba(0,200,255,0.35)]
-            transition-all duration-300
-          "
-        >
-          <motion.img
-            src="/sonal.png"
-            className="w-full h-84 object-cover rounded-xl"
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          />
-
-          <div className="mt-4">
-            <p className="text-white/80 text-sm mb-2">
-              📅 <span className="font-semibold">December 3rd, 2025</span>
-            </p>
-
-            <h3 className="text-xl font-bold text-cyan-300">
-              Sonal – DJ Night
-            </h3>
-
-            <p className="text-white/80 text-sm mt-2 leading-relaxed">
-              A spectacular DJ performance featuring immersive beats, stunning
-              visuals and electrifying energy.
-            </p>
-
-            <Button
-              asChild
-              className="mt-4 w-full bg-cyan-600 hover:bg-cyan-700 text-white"
-            >
-              <a href="https://instagram.com" target="_blank">
-                ▶ Watch on Instagram
-              </a>
-            </Button>
-          </div>
-        </motion.div>
-
         {/* ================= CARD 2 ================= */}
         <motion.div
           variants={fadeUp}
@@ -107,7 +58,7 @@ export default function FeaturingSection() {
           custom={2}
           viewport={{ once: false }}
           className="
-            relative w-[90%] md:w-[360px] 
+            relative w-full md:w-[360px] 
             bg-[rgba(20,20,35,0.75)] 
             backdrop-blur-2xl border border-white/10 
             rounded-3xl p-5 
@@ -124,8 +75,9 @@ export default function FeaturingSection() {
           />
 
           <div className="mt-4">
-            <p className="text-white/80 text-sm mb-2">
-              📅 <span className="font-semibold">December 4th, 2025</span>
+            <p className="text-white/80 text-sm mb-2 flex flex-col justify-center">
+              <span className="font-semibold">📅 3rd December, 2025</span>
+              <span className="font-semibold">⏰ 6:30 PM</span>
             </p>
 
             <h3 className="text-xl font-bold text-pink-300">
@@ -136,15 +88,46 @@ export default function FeaturingSection() {
               An explosive live band concert packed with roaring guitars,
               thunderous drums, and a crowd-shaking performance.
             </p>
+          </div>
+        </motion.div>
+        {/* ================= CARD 1 ================= */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          custom={1}
+          viewport={{ once: false }}
+          className="
+            relative w-full md:w-[360px] 
+            bg-[rgba(20,20,35,0.75)] 
+            backdrop-blur-2xl border border-white/10 
+            rounded-3xl p-5 
+            shadow-[0_0_25px_rgba(0,200,255,0.15)]
+            hover:shadow-[0_0_35px_rgba(0,200,255,0.35)]
+            transition-all duration-300
+          "
+        >
+          <motion.img
+            src="/sonal.png"
+            className="w-full h-84 object-cover rounded-xl"
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          />
 
-            <Button
-              asChild
-              className="mt-4 w-full bg-pink-600 hover:bg-pink-700 text-white"
-            >
-              <a href="https://instagram.com" target="_blank">
-                ▶ Watch Clip
-              </a>
-            </Button>
+          <div className="mt-4">
+            <p className="text-white/80 text-sm mb-2 flex flex-col justify-center">
+              <span className="font-semibold">📅 4th December, 2025</span>
+              <span className="font-semibold">⏰ 7 PM</span>
+            </p>
+
+            <h3 className="text-xl font-bold text-cyan-300">
+              Sonal – DJ Night
+            </h3>
+
+            <p className="text-white/80 text-sm mt-2 leading-relaxed">
+              A spectacular DJ performance featuring immersive beats, stunning
+              visuals and electrifying energy.
+            </p>
           </div>
         </motion.div>
       </div>

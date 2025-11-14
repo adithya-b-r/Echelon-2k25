@@ -25,7 +25,7 @@ export default function AboutSection() {
   return (
     <div
       id="about"
-      className="w-full min-h-screen shadow-2xl pt-30 px-6 py-14 md:px-20 flex flex-col gap-20 z-100 relative"
+      className="w-full min-h-screen shadow-2xl pt-30 px-2 py-14 md:px-20 flex flex-col gap-20 z-100 relative"
       style={{
         background:
           "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(139, 92, 246, 0.25), transparent 70%), #000000",
@@ -64,7 +64,7 @@ export default function AboutSection() {
         About Echelon 25{" "}
       </motion.h1>{" "}
       {/* Content Wrapper */}{" "}
-      <div className="flex flex-col gap-10 max-w-4xl mx-auto">
+      <div className="flex flex-col px-3 gap-10 max-w-4xl mx-auto">
         {" "}
         <motion.p
           variants={fadeUp}
@@ -74,8 +74,8 @@ export default function AboutSection() {
           className="text-lg leading-relaxed text-blue-100"
         >
           {" "}
-          Echelon 2K25 is the flagship management fest of the Department of
-          Business Administration, bringing together aspiring managers,
+          Echelon25 is the flagship management fest of the Department of Master
+          of Business Administration, bringing together aspiring managers,
           thinkers, and innovators from various institutions to showcase their
           managerial brilliance. The fest embodies creativity, competition, and
           collaboration — offering a dynamic platform where intellect meets
