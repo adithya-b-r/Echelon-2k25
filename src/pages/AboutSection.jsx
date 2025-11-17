@@ -71,7 +71,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-lg leading-relaxed text-blue-100 text-justify"
+          className="text-lg leading-relaxed text-blue-100 text-left"
         >
           {" "}
           Echelon 25 is the flagship management fest of the Department of Master
@@ -86,7 +86,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-lg leading-relaxed text-blue-100 text-justify"
+          className="text-lg leading-relaxed text-blue-100 text-left"
         >
           {" "}
           Every edition of Echelon celebrates a new dimension of management.
@@ -113,7 +113,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-lg leading-relaxed text-blue-100 text-justify"
+          className="text-lg leading-relaxed text-blue-100 text-left"
         >
           {" "}
           Shree Devi Institute of Technology, Kenjar, Mangaluru affiliated with
@@ -129,7 +129,7 @@ export default function AboutSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-lg leading-relaxed text-blue-100"
+          className="text-lg leading-relaxed text-blue-100 text-left"
         >
           {" "}
           The institute offers students the opportunity to pursue engineering,

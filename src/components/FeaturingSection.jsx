@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 
 export default function FeaturingSection() {
   const fadeUp = {
@@ -21,24 +20,25 @@ export default function FeaturingSection() {
 
   return (
     <div className="flex flex-col items-center w-full pt-10 pb-20 relative">
-      {/* TITLE */}
       {/* BACKGROUND TEXT */}
       <h1
         className="
-            absolute 
-            md:-top-20 
-            top-5
-            left-1/2 -translate-x-1/2
-            text-[50px] md:text-[180px] 
-            font-extrabold 
-            tracking-widest
-            text-white/5 
-            select-none 
-            pointer-events-none
-  "
+          absolute 
+          md:-top-20 
+          top-5
+          left-1/2 -translate-x-1/2
+          text-[50px] md:text-[180px] 
+          font-extrabold 
+          tracking-widest
+          text-white/5 
+          select-none 
+          pointer-events-none
+        "
       >
         FEATURING
       </h1>
+
+      {/* SECTION TITLE */}
       <motion.h2
         variants={fadeUp}
         initial="hidden"
@@ -50,7 +50,8 @@ export default function FeaturingSection() {
 
       {/* CARD WRAPPER */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full px-6">
-        {/* ================= CARD 2 ================= */}
+
+        {/* ================= CARD 1 (PINK GLOW) ================= */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -58,15 +59,35 @@ export default function FeaturingSection() {
           custom={2}
           viewport={{ once: false }}
           className="
-            relative w-full md:w-[360px] 
-            bg-[rgba(20,20,35,0.75)] 
-            backdrop-blur-2xl border border-white/10 
+            relative w-full md:w-[360px]
+            bg-[rgba(20,20,35,0.75)]
+            backdrop-blur-2xl border border-white/10
             rounded-3xl p-5 
-            shadow-[0_0_25px_rgba(255,80,160,0.18)]
-            hover:shadow-[0_0_35px_rgba(255,80,160,0.35)]
+            overflow-hidden
+            shadow-[0_0_40px_rgba(255,80,160,0.35)]
+            hover:shadow-[0_0_55px_rgba(255,80,160,0.65)]
             transition-all duration-300
           "
         >
+          {/* GLOW LAYERS */}
+          <div className="absolute inset-0">
+            {/* Main radial aura */}
+            <div
+              className="
+                absolute inset-0
+                bg-[radial-gradient(circle_at_center,rgba(255,80,160,0.35),transparent_70%)]
+                blur-2xl
+              "
+            />
+
+            {/* Pulsing glow */}
+            <motion.div
+              className="absolute inset-0 bg-pink-500 rounded-full opacity-20 blur-[80px]"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+
           <motion.img
             src="/thai.jpg"
             className="w-full h-84 object-cover rounded-xl"
@@ -90,7 +111,8 @@ export default function FeaturingSection() {
             </p>
           </div>
         </motion.div>
-        {/* ================= CARD 1 ================= */}
+
+        {/* ================= CARD 2 (CYAN GLOW) ================= */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -98,15 +120,35 @@ export default function FeaturingSection() {
           custom={1}
           viewport={{ once: false }}
           className="
-            relative w-full md:w-[360px] 
-            bg-[rgba(20,20,35,0.75)] 
-            backdrop-blur-2xl border border-white/10 
+            relative w-full md:w-[360px]
+            bg-[rgba(20,20,35,0.75)]
+            backdrop-blur-2xl border border-white/10
             rounded-3xl p-5 
-            shadow-[0_0_25px_rgba(0,200,255,0.15)]
-            hover:shadow-[0_0_35px_rgba(0,200,255,0.35)]
+            overflow-hidden
+            shadow-[0_0_40px_rgba(0,200,255,0.35)]
+            hover:shadow-[0_0_55px_rgba(0,200,255,0.65)]
             transition-all duration-300
           "
         >
+          {/* GLOW LAYERS */}
+          <div className="absolute inset-0">
+            {/* Radial aura */}
+            <div
+              className="
+                absolute inset-0
+                bg-[radial-gradient(circle_at_center,rgba(0,200,255,0.35),transparent_70%)]
+                blur-2xl
+              "
+            />
+
+            {/* Pulsing aura */}
+            <motion.div
+              className="absolute inset-0 bg-cyan-400 rounded-full opacity-20 blur-[80px]"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+
           <motion.img
             src="/sonal.png"
             className="w-full h-84 object-cover rounded-xl"
@@ -125,8 +167,8 @@ export default function FeaturingSection() {
             </h3>
 
             <p className="text-white/80 text-sm mt-2 leading-relaxed">
-              A spectacular DJ performance featuring immersive beats, stunning
-              visuals and electrifying energy.
+              A spectacular DJ performance featuring immersive beats,
+              stunning visuals and electrifying energy.
             </p>
           </div>
         </motion.div>

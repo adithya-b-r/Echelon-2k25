@@ -108,7 +108,11 @@ const Sidebars = () => {
           {navItems.map((item, i) => (
             <button
               key={i}
-              onClick={() => scrollToSection(item.target)}
+              onClick={() =>
+                item.link
+                  ? window.open("/ECHELON.pdf", "_blank") // opens or downloads depending on browser
+                  : scrollToSection(item.target)
+              }
               className="flex flex-col items-center transition-all duration-300 group focus:outline-none"
             >
               <div

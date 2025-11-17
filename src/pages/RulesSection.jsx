@@ -28,7 +28,7 @@ const RulesSection = () => {
   const managementRules = [
     "Any number of participants from a college can participate for the event.",
     "The event is open to both UG and PG students.",
-    "Registration fee: ₹180 per participant. (Register on or before Nov 30th to get Early Bird discount of ₹150)",
+    "Registration fee: ₹180 per participant. (Register before Nov 30th to get Early Bird discount of ₹150)",
     "Participants should carry laptop, calculator, net setter, pen drive etc.",
     "The organisers will not be liable for the provision of any items.",
     "Judges & organizers decision will be final and binding.",

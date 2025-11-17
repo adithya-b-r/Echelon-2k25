@@ -143,7 +143,7 @@ export default function Footer() {
 
             {/* BROCHURE BUTTON */}
             <a
-              href="/ECHELON2025.pdf"
+              href="/ECHELON.pdf"
               download
               className="block text-center w-full px-5 py-2 bg-linear-to-r from-red-600 to-pink-500 rounded-xl font-semibold shadow-md hover:shadow-lg transition"
             >
