@@ -20,7 +20,6 @@ export default function FeaturingSection() {
 
   return (
     <div className="flex flex-col items-center w-full pt-10 pb-20 relative">
-      {/* BACKGROUND TEXT */}
       <h1
         className="
           absolute 
@@ -38,7 +37,6 @@ export default function FeaturingSection() {
         FEATURING
       </h1>
 
-      {/* SECTION TITLE */}
       <motion.h2
         variants={fadeUp}
         initial="hidden"
@@ -50,8 +48,6 @@ export default function FeaturingSection() {
 
       {/* CARD WRAPPER */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-12 w-full px-6">
-
-        {/* ================= CARD 1 (PINK GLOW) ================= */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
@@ -112,7 +108,7 @@ export default function FeaturingSection() {
           </div>
         </motion.div>
 
-        {/* ================= CARD 2 (CYAN GLOW) ================= */}
+
         <motion.div
           variants={fadeUp}
           initial="hidden"
