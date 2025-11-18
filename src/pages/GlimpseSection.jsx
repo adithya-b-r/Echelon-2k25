@@ -1,86 +1,65 @@
 import React from "react";
 import CircularGallery from "@/components/CircularGallery";
+import GradientText from "@/components/GradientText";
 
 const GlimpseSection = () => {
-  // 👇 Custom images & captions
   const items = [
-    {
-      image: "Glimpse1.JPG",
-      text: "Inauguration",
-    },
-    {
-      image: "Glimpse2.JPG",
-      text: "Teamwork",
-    },
-    {
-      image: "Glimpse3.JPG",
-      text: "Moments",
-    },
-    {
-      image: "Glimpse4.JPG",
-      text: "Leadership",
-    },
-    {
-      image: "Glimpse5.JPG",
-      text: "Creativity",
-    },
-    {
-      image: "Glimpse6.JPG",
-      text: "Winners",
-    },
-    {
-      image: "Glimpse7.JPG",
-      text: "Teamwork",
-    },
-    {
-      image: "Glimpse8.jpg",
-      text: "Moments",
-    },
-    {
-      image: "Glimpse9.JPG",
-      text: "Leadership",
-    },
-    {
-      image: "Glimpse10.JPG",
-      text: "Creativity",
-    },
-    {
-      image: "Glimpse11.JPG",
-      text: "Winners",
-    },
+    { image: "Glimpse1.JPG" },
+    { image: "Glimpse2.JPG" },
+    { image: "Glimpse3.heic" },
+    { image: "Glimpse4.JPG" },
+    { image: "Glimpse5.JPG" },
+    { image: "Glimpse6.JPG" },
+    { image: "Glimpse7.JPG" },
+    { image: "Glimpse8.jpg" },
+    { image: "Glimpse9.jpeg" },
+    { image: "Glimpse10.JPG" },
+    { image: "Glimpse11.JPG" },
   ];
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center py-16 md:py-24"
+      className="relative h-screen bg-black/80 backdrop-blur-xl border-t border-white/10 flex flex-col items-center justify-center py-16 md:py-24 overflow-hidden"
       style={{
         height: "700px",
         zIndex: 50,
       }}
     >
+      {/* ===== BIG BACKGROUND TEXT ===== */}
       <h1
         className="
-        text-3xl sm:text-4xl md:text-5xl
-        font-bold font-mono text-white text-center
-        tracking-wide
-        drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]
-        px-8 py-4 rounded-2xl
-        bg-[rgba(255,255,255,0.08)]
-        backdrop-blur-xl
-        border border-[rgba(255,255,255,0.15)]
-        shadow-[0_0_25px_rgba(0,255,255,0.3)]"
+          absolute -top-10 left-1/2 -translate-x-1/2 
+          text-[110px] md:text-[240px] 
+          font-extrabold uppercase tracking-widest
+          text-white/10 select-none pointer-events-none
+        "
       >
-        Glimpse of Echelon
+        GLIMPSE
       </h1>
 
-      {/* Circular Gallery */}
-      <div className="w-full h-full flex justify-center">
+      {/* ===== HEADING ===== */}
+      <div className="mb-12 md:mb-20 z-10 text-center px-4 bg-transparent">
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          className="text-3xl md:text-5xl font-bold leading-tight block bg-transparent"
+        >
+          <span className="block md:hidden">
+            Glimpse of MBA <br /> Department
+          </span>
+          <span className="hidden md:block">Glimpse of MBA Department</span>
+        </GradientText>
+      </div>
+
+      {/* ===== CIRCULAR GALLERY ===== */}
+      <div className="w-full h-full flex justify-center z-10">
         <CircularGallery
-          items={items} // ✅ Pass your custom images here
+          items={items}
           bend={1}
           textColor="#ffffff"
           borderRadius={0.05}
-          scrollEase={0.02}
+          scrollEase={0.15}
+          scrollSpeed={5}
         />
       </div>
     </div>

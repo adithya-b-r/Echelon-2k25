@@ -1,10 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import bg from "../assets/bg.jpg";
-import far from "../assets/buildings_far.png";
-import near from "../assets/buildings_near.png";
-import shadow from "../assets/shadow.png";
-import scooter from "../assets/scooter.png";
 
 const AnimatedCityBg = () => {
   const videoRef = useRef(null);
@@ -16,14 +11,19 @@ const AnimatedCityBg = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div
+      id="home"
+      className="relative w-full h-screen overflow-hidden select-none"
+    >
       <video
         ref={videoRef}
-        src="/bg.mp4"
+        src="/output.webm"
         autoPlay
-        muted
         loop
+        muted
         playsInline
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback nofullscreen"
         className="fixed top-0 left-0 w-full h-full object-cover z-[-1]"
       />
     </div>

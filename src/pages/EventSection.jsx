@@ -1,290 +1,518 @@
-"use client";
-import React, { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
-  useMotionValue,
-  useAnimationFrame,
+  useAnimation,
+  useInView,
 } from "framer-motion";
+import GradientText from "@/components/GradientText";
+import GoldenButton from "@/components/GoldThinButton";
 
-const eventsData = [
+// EVENTS DATA
+const events = [
   {
-    id: 1,
-    title: "FINZO (Finance)",
-    tagline: "Quick trades, Big gains",
-    team: "Participants: 2 make a team",
-    description:
-      "A finance-based event that challenges your decision-making and market strategy skills.",
-    image: "BM.JPG",
-    details: `
-    Open to UG & PG students.
-    ₹180 per person! Use code ECHELON25 for Early Bird Offer.
-    Participants must have a laptop, calculator, and Wi-Fi.
-    Coordinators: Sadhvi - 8296614411, Gaurav Kotian - 8050798759
-    `,
+    title: "FINZO (FINANCE)",
+    subtitle: "Quick trades, Big gains",
+    participants: "Participants: 2 make a team.",
+    img: "/Finance .JPG",
+    bg: "/FinanceBG.JPG",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a laptop, calculator and a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Sadhvi – 8296614411", "Gaurav Kotian – 8050798759"],
   },
   {
-    id: 2,
     title: "HIREKART (HR)",
-    tagline: "Enrich, Engage, Empower",
-    team: "Participants: 2 make a team",
-    description:
-      "Test your HR expertise through strategic people management challenges.",
-    image: "Hrlogo.JPG",
-    details: `
-    Open to UG & PG students.
-    ₹180 per person! Use code ECHELON25 for Early Bird Offer.
-    Participants must have a laptop and Wi-Fi.
-    Coordinators: Bhimambika - 9606661682, Prajna K P - 9611020196
-    `,
+    subtitle: "Enrich, Engage, Empower",
+    participants: "Participants: 2 make a team.",
+    img: "/Hrlogo.JPG",
+    bg: "/HRBG.JPG",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Bhimambika – 9606661682", "Prajna K P – 9611020196"],
   },
   {
-    id: 3,
-    title: "MARK-IT (Marketing Event)",
-    tagline: "Where speed meets success",
-    team: "Participants: 2 make a team",
-    description:
-      "A marketing challenge to test creativity, strategy, and quick thinking.",
-    image: "Marketing.PNG",
-    details: `
-    Open to UG & PG students.
-    ₹180 per person! Use code ECHELON25 for Early Bird Offer.
-    Participants must have a laptop and Wi-Fi.
-    Coordinators: John Sebastian Miranda - 9380675622, Shalmali - 9880364735
-    `,
+    title: "MARK-IT (MARKETING EVENT)",
+    subtitle: "Where speed meets success",
+    participants: "Participants: 2 make a team.",
+    img: "/Marketing.PNG",
+    bg: "/MarketingBG.png",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a laptop and a stable Wi-Fi connection.",
+    ],
+    coordinators: [
+      "John Sebastian Miranda – 9380675622",
+      "Shalmali – 9880364735",
+    ],
   },
   {
-    id: 4,
-    title: "ZEPBOSS (Best Manager)",
-    tagline: "One blink, One bold decision",
-    team: "Individual event",
-    description:
-      "A flagship managerial challenge testing leadership, strategy, and decision-making.",
-    image: "BMT.JPG",
-    details: `
-    Open to UG & PG students.
-    ₹180 per person! Use code ECHELON25 for Early Bird Offer.
-    Coordinators: Shiny S Devadiga - 9901442039, Deevika B R - 7019347069
-    `,
+    title: "RapidOPS (BMT)",
+    subtitle: "Optimize, Organise, Outstand",
+    participants: "Participants: 3 make a team.",
+    img: "/BMT.JPG",
+    bg: "/BMTBG.jpg",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a laptop and a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Dhananjay – 8722802212", "Nishana – 9353264949"],
   },
   {
-    id: 5,
-    title: "InstaPitch (Spark Tank)",
-    tagline: "Think. Pitch. Win.",
-    team: "Participants: 2 make a team",
-    description:
-      "Pitch your startup ideas and win big in this entrepreneurial challenge.",
-    image: "Spark Tank.JPG",
-    details: `
-    Open to UG & PG students.
-    ₹180 per person! Use code ECHELON25 for Early Bird Offer.
-    Coordinators: Shahil Shetty - 7619631140, Navya Alva - 9740944317
-    `,
+    title: "ZEPBOSS (BEST MANAGER)",
+    subtitle: "One blink, One bold decision",
+    participants: "Participant: Individual event",
+    img: "/BM.JPG",
+    bg: "/BMBG.png",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participant must have a laptop and a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Shiny S Devadiga – 9901442039", "Deevika B R – 7019347069"],
+  },
+  {
+    title: "BizzBasket (BUSINESS QUIZ)",
+    subtitle: "Strategy in every pick",
+    participants: "Participants: 2 make a team.",
+    img: "/BQ.png",
+    bg: "/BQBG.jpg",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a laptop and a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Awab Shaikh – 7022173912", "Ananya G – 8310243369"],
+  },
+  {
+    title: "InstaPitch (SPARK TANK)",
+    subtitle: "Think. Pitch. Win.",
+    participants: "Participants: 2 make a team.",
+    img: "/Spark Tank.JPG",
+    bg: "/SparkTankBG.jpg",
+    guidelines: [
+      "This event is open to both UG and PG students.",
+      "₹180 per participant! Use code ECHELON25 and grab the early bird offer now.",
+      "Participants must have a laptop and a stable Wi-Fi connection.",
+    ],
+    coordinators: ["Shahil Shetty – 7619631140", "Navya Alva – 9740944317"],
   },
 ];
 
-const EventsSection = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const baseVelocity = -0.5; // Negative for left scroll
-  const x = useMotionValue(0);
+// ANIMATION VARIANTS
+const leftVariants = {
+  hidden: { opacity: 0, x: -150 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
+};
+const centerVariants = {
+  hidden: { opacity: 0, y: 150 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9 } },
+};
+const rightVariants = {
+  hidden: { opacity: 0, x: 150 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.9 } },
+};
 
-  // Create multiple copies for seamless infinite scroll
-  const repeatedEvents = [
-    ...eventsData,
-    ...eventsData,
-    ...eventsData,
-    ...eventsData,
-  ];
-  const cardWidth = 316; // 300px + 16px gap
-  const totalWidth = repeatedEvents.length * cardWidth;
+const scooterVariants = {
+  hidden: { opacity: 0, x: "-200%" },
 
-  useAnimationFrame((t, delta) => {
-    if (!isDragging && !isPaused) {
-      let moveBy = baseVelocity * (delta / 16);
-      x.set(x.get() + moveBy);
+  visible: {
+    opacity: 1,
 
-      // Reset position for infinite loop
-      if (x.get() <= -totalWidth / 2) {
-        x.set(x.get() + totalWidth / 2);
-      }
-      if (x.get() >= 0) {
-        x.set(x.get() - totalWidth / 2);
-      }
+    x: 0,
+    transition: { type: "spring", stiffness: 60, damping: 12 },
+  },
+};
+
+// MAIN COMPONENT
+export default function EventSection() {
+  const [selected, setSelected] = useState(null);
+
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { margin: "-10%", once: false });
+
+  const leftAnim = useAnimation();
+  const centerAnim = useAnimation();
+  const rightAnim = useAnimation();
+  const scooterAnim = useAnimation();
+
+  // Trigger animations manually when section enters view
+  useEffect(() => {
+    if (inView) {
+      leftAnim.start("visible");
+      centerAnim.start("visible");
+      rightAnim.start("visible");
+      scooterAnim.start("visible");
+    } else {
+      leftAnim.start("hidden");
+      centerAnim.start("hidden");
+      rightAnim.start("hidden");
+      scooterAnim.start("hidden");
     }
-  });
-
-  const handleCardClick = (event) => {
-    if (!isDragging) {
-      setSelectedEvent(event);
-    }
-  };
+  }, [inView]);
 
   return (
-    <section
+    <div
+      ref={sectionRef}
       id="events"
-      className="relative py-16 md:py-24 bg-transparent text-white overflow-hidden z-[999] select-none"
-      style={{
-        WebkitUserSelect: "none",
-        userSelect: "none",
-      }}
+      className="w-full pt-30 py-20 md:py-28 flex flex-col items-center relative overflow-hidden
+      bg-transparent [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"
     >
-      {/* Header */}
-      <div className="flex justify-center mb-12">
-        <h1
-          className="
-          text-3xl sm:text-4xl md:text-5xl
-          font-bold font-mono text-white text-center
-          tracking-wide
-          drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]
-          px-8 py-4 rounded-2xl
-          bg-[rgba(255,255,255,0.08)]
-          backdrop-blur-xl
-          border border-[rgba(255,255,255,0.15)]
-          shadow-[0_0_25px_rgba(0,255,255,0.3)]
-          glass-animate
-        "
+      {/* BACKGROUND FLOATING EVENTS TEXT */}
+      <div className="absolute inset-0 z-0 flex flex-col items-center justify-start pt-10 pointer-events-none select-none">
+        {/* FIRST TEXT — LEFT SIDE ENTRY */}
+        <motion.h1
+          variants={leftVariants}
+          initial="hidden"
+          animate={leftAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
         >
-          Events
-        </h1>
+          EVENTS
+        </motion.h1>
+
+        {/* SECOND TEXT — CENTER FADE-UP */}
+        <motion.h1
+          variants={centerVariants}
+          initial="hidden"
+          animate={centerAnim}
+          className="text-white/4 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+
+        {/* THIRD TEXT — RIGHT SIDE ENTRY */}
+        <motion.h1
+          variants={rightVariants}
+          initial="hidden"
+          animate={rightAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+        <motion.h1
+          variants={centerVariants}
+          initial="hidden"
+          animate={centerAnim}
+          className="text-white/4 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
+        <motion.h1
+          variants={rightVariants}
+          initial="hidden"
+          animate={rightAnim}
+          className="text-white/5 font-extrabold 
+      text-[110px] md:text-[220px] leading-none tracking-widest"
+        >
+          EVENTS
+        </motion.h1>
       </div>
 
-      {/* Infinite Scrolling Carousel */}
-      <div
-        className="overflow-hidden relative cursor-grab active:cursor-grabbing"
-        style={{
-          WebkitUserSelect: "none",
-          userSelect: "none",
-        }}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <motion.div
-          className="flex space-x-4 px-6"
-          style={{ x }}
-          drag="x"
-          dragElastic={0.05}
-          dragConstraints={{ left: -totalWidth / 2, right: 0 }}
-          onDragStart={() => setIsDragging(true)}
-          onDragEnd={() => {
-            setTimeout(() => setIsDragging(false), 100);
-          }}
-          dragTransition={{
-            power: 0.3,
-            timeConstant: 200,
-          }}
+      {/* TITLE */}
+      <div className="mb-12 md:mb-20 z-10">
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          className="text-3xl md:text-5xl font-bold"
         >
-          {repeatedEvents.map((event, i) => (
-            <motion.div
-              key={`${event.id}-${i}`}
-              className="
-                bg-[rgba(15,15,25,0.85)]
-                backdrop-blur-lg
-                rounded-2xl overflow-hidden
-                border border-[rgba(255,255,255,0.15)]
-                shadow-[0_0_20px_rgba(0,255,255,0.15)]
-                hover:shadow-[0_0_35px_rgba(0,255,255,0.5)]
-                transform transition-all duration-300
-                hover:-translate-y-2 hover:scale-[1.05]
-                flex flex-col
-                w-[260px] sm:w-[280px] md:w-[300px] flex-shrink-0
-              "
-              onClick={() => handleCardClick(event)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <motion.img
-                src={event.image}
-                alt={event.title}
-                className="h-44 w-full object-cover opacity-90 pointer-events-none"
-                style={{
-                  userSelect: "none",
-                  WebkitUserDrag: "none",
-                  pointerEvents: "none",
-                }}
-                draggable="false"
-              />
-              <div className="p-4 flex flex-col flex-grow justify-between">
-                <div>
-                  <h3 className="text-lg font-semibold mb-1 text-cyan-400">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-gray-300 mb-1 italic">
-                    {event.tagline}
-                  </p>
-                  <p className="text-xs text-gray-400">{event.team}</p>
-                </div>
-                <p className="text-gray-400 text-sm mt-3 line-clamp-2">
-                  {event.description}
-                </p>
-              </div>
-            </motion.div>
+          Management Events
+        </GradientText>
+      </div>
+
+      {/* GRID */}
+      <div className="grid grid-cols-3 gap-y-5 md:gap-y-20 w-full max-w-5xl z-10">
+        {/* LEFT COLUMN */}
+        <motion.div
+          variants={leftVariants}
+          initial="hidden"
+          animate={leftAnim}
+          className="flex flex-col items-center gap-10 md:gap-20"
+        >
+          {events.slice(0, 3).map((ev, i) => (
+            <EventCircle key={i} ev={ev} onClick={() => setSelected(ev)} />
+          ))}
+        </motion.div>
+
+        {/* CENTER COLUMN */}
+        <motion.div
+          variants={centerVariants}
+          initial="hidden"
+          animate={centerAnim}
+          className="flex flex-col items-center mt-6 md:mt-20"
+        >
+          <motion.img
+            src="/scooter.png"
+            variants={scooterVariants}
+            initial="hidden"
+            animate={scooterAnim}
+            className="w-28 md:w-56 mb-12 drop-shadow-[0_0_20px_rgba(255,60,60,0.6)]"
+          />
+
+          <EventCircle ev={events[3]} onClick={() => setSelected(events[3])} />
+        </motion.div>
+
+        {/* RIGHT COLUMN */}
+        <motion.div
+          variants={rightVariants}
+          initial="hidden"
+          animate={rightAnim}
+          className="flex flex-col items-center gap-10 md:gap-20"
+        >
+          {events.slice(4).map((ev, i) => (
+            <EventCircle key={i} ev={ev} onClick={() => setSelected(ev)} />
           ))}
         </motion.div>
       </div>
 
-      {/* Overlay Modal */}
+      {/* MODAL */}
       <AnimatePresence>
-        {selectedEvent && (
-          <motion.div
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-[9999] p-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedEvent(null)}
-          >
-            <motion.div
-              className="
-              bg-[rgba(15,15,25,0.95)]
-              backdrop-blur-xl rounded-2xl
-              max-w-lg w-full p-6 relative border border-[rgba(255,255,255,0.2)]
-              shadow-[0_0_40px_rgba(0,255,255,0.4)]
-              select-none
-            "
-              style={{
-                WebkitUserSelect: "none",
-                userSelect: "none",
-              }}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 150, damping: 20 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                className="absolute top-3 right-4 text-white text-2xl font-bold hover:text-cyan-400 transition"
-                onClick={() => setSelectedEvent(null)}
-              >
-                ×
-              </button>
-
-              <img
-                src={selectedEvent.image}
-                alt={selectedEvent.title}
-                className="w-full h-52 object-cover rounded-lg mb-4 opacity-95 pointer-events-none"
-                draggable="false"
-                style={{
-                  WebkitUserDrag: "none",
-                  userSelect: "none",
-                }}
-              />
-              <h2 className="text-2xl font-bold mb-2 text-cyan-400">
-                {selectedEvent.title}
-              </h2>
-              <p className="text-cyan-300 mb-2 italic">
-                {selectedEvent.tagline}
-              </p>
-              <p className="text-gray-300 mb-3 text-sm">{selectedEvent.team}</p>
-              <p className="whitespace-pre-line text-gray-400 text-sm leading-relaxed">
-                {selectedEvent.details}
-              </p>
-            </motion.div>
-          </motion.div>
+        {selected && (
+          <EventModal event={selected} onClose={() => setSelected(null)} />
         )}
       </AnimatePresence>
-    </section>
+      <GoldenButton />
+    </div>
   );
-};
+}
 
-export default EventsSection;
+// EVENT CIRCLE — GLOSSY GLASS STYLE
+function EventCircle({ ev, onClick }) {
+  return (
+    <div className="flex flex-col items-center text-center">
+      <motion.div
+        whileHover={{ scale: 1.08 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={onClick}
+        className="
+          relative group
+          w-24 h-24 md:w-44 md:h-44
+          rounded-full cursor-pointer
+          transition-all duration-300
+        "
+      >
+        {/* GLASS BORDER */}
+        <div
+          className="
+            absolute inset-0 rounded-full 
+            bg-white/10 backdrop-blur-xl
+            border border-white/30
+            shadow-[0_0_15px_rgba(255,255,255,0.15),inset_0_0_12px_rgba(255,255,255,0.25)]
+          "
+        ></div>
+
+        {/* SHINY HIGHLIGHT */}
+        <div
+          className="
+            absolute -top-1 -left-1 
+            w-10 h-10 md:w-20 md:h-20 
+            rounded-full 
+            bg-white/40 blur-xl
+            opacity-60 rotate-12
+          "
+        ></div>
+
+        {/* INNER GLOW */}
+        <div
+          className="
+            absolute inset-0 rounded-full 
+            shadow-[0_0_25px_rgba(255,80,80,0.45)]
+          "
+        ></div>
+
+        {/* IMAGE */}
+        <img
+          src={ev.img}
+          alt={ev.title}
+          className="w-full h-full object-cover rounded-full relative z-10"
+        />
+      </motion.div>
+
+      {/* NAME UNDER CIRCLE */}
+      <p
+        className="
+    text-white mt-2 md:mt-3 
+    text-[10px] md:text-lg font-semibold 
+    leading-tight 
+    w-24 md:w-44 
+    h-8 md:h-[50px] 
+    flex items-center justify-center 
+    text-center
+  "
+      >
+        {ev.title}
+      </p>
+    </div>
+  );
+}
+
+// EVENT MODAL
+function EventModal({ event, onClose }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-999 bg-black/70 backdrop-blur-xl flex items-center justify-center p-6"
+      onClick={onClose}
+    >
+      {/* MODAL CARD */}
+      <motion.div
+        initial={{ scale: 0.7, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.7, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        onClick={(e) => e.stopPropagation()}
+        className="
+    relative rounded-3xl p-8 max-w-xl w-full text-white shadow-2xl
+    bg-cover bg-center bg-no-repeat
+    border border-white/20
+  "
+        style={{
+          backgroundImage: `url(${event.bg})`,
+        }}
+      >
+        {/* BACK BUTTON */}
+        <button
+          onClick={onClose}
+          className="
+            absolute top-4 left-4 
+            px-3 py-1.5 
+            text-sm font-semibold
+            rounded-lg
+            bg-white/20 hover:bg-white/30
+            border border-white/30
+            backdrop-blur-xl
+            transition
+            z-99999
+          "
+        >
+          ❮ Back
+        </button>
+
+        {/* CONTENT WRAPPER */}
+        <motion.div
+          initial={{ opacity: 0, filter: "blur(14px)" }}
+          animate={{ opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="pt-10"
+        >
+          <h2 className="text-3xl font-bold text-center">{event.title}</h2>
+          <p className="text-purple-300 italic text-center text-lg mt-1">
+            {event.subtitle}
+          </p>
+
+          <p className="mt-4 text-center text-white/90">{event.participants}</p>
+
+          {/* SCROLLABLE CONTENT */}
+          <div
+            className="
+              mt-6 
+              max-h-50
+              overflow-y-auto 
+              pr-2
+              custom-scrollbar
+            "
+            onWheel={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
+            {/* GUIDELINES */}
+            <h3 className="font-semibold text-xl mb-2">Guidelines:</h3>
+
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    delayChildren: 0.3,
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              {event.guidelines.map((g, i) => (
+                <motion.p
+                  key={i}
+                  className="mb-1"
+                  variants={{
+                    hidden: { opacity: 0, x: -10, filter: "blur(4px)" },
+                    show: { opacity: 1, x: 0, filter: "blur(0px)" },
+                  }}
+                >
+                  • {g}
+                </motion.p>
+              ))}
+            </motion.div>
+
+            {/* COORDINATORS */}
+            <h3 className="font-semibold text-xl mt-5 mb-2">Coordinators:</h3>
+
+            <motion.div
+              initial="hidden"
+              animate="show"
+              variants={{
+                hidden: { opacity: 0 },
+                show: {
+                  opacity: 1,
+                  transition: {
+                    delayChildren: 0.3,
+                    staggerChildren: 0.1,
+                  },
+                },
+              }}
+            >
+              {event.coordinators.map((c, i) => (
+                <motion.p
+                  key={i}
+                  className="mb-1"
+                  variants={{
+                    hidden: { opacity: 0, x: -10, filter: "blur(4px)" },
+                    show: { opacity: 1, x: 0, filter: "blur(0px)" },
+                  }}
+                >
+                  {c}
+                </motion.p>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* REGISTER BUTTON */}
+          <a
+            href="https://konfhub.com/echelon-2k25"
+            target="_blank"
+            rel="noreferrer"
+            className="cursor-pointer"
+          >
+            <motion.button
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              className="
+              mt-8 px-6 py-3 w-full 
+              rounded-lg bg-linear-to-r cursor-pointer from-red-600 via-red-500 to-red-700
+              shadow-[0_0_15px_rgba(255,60,60,0.7)] border border-red-300/40 backdrop-blur-xl
+              transition-all duration-300 hover:scale-105
+              font-bold tracking-wide text-center
+              
+            "
+            >
+              Register
+            </motion.button>
+          </a>
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}

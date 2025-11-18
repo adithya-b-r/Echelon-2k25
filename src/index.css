@@ -3,9 +3,14 @@
 
 @custom-variant dark (&:is(.dark *));
 
+* {
+  font-family: "Goldman", sans-serif;
+}
+
 body {
   background-color: #02010a;
   overflow-x: hidden;
+  font-family: "Goldman", sans-serif;
 }
 
 @theme inline {
@@ -133,7 +138,6 @@ body {
   scrollbar-width: none;
 }
 
-
 /* ===== NEON SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 10px;
@@ -163,9 +167,9 @@ body {
   scrollbar-color: #00ffff rgba(20, 20, 30, 0.5);
 }
 
-
 @keyframes glowPulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
   }
   50% {
@@ -175,4 +179,32 @@ body {
 
 .glass-glow {
   animation: glowPulse 3s infinite ease-in-out;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 6s linear infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    letter-spacing: 6px;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 2px;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.4s ease-in-out infinite alternate;
 }
