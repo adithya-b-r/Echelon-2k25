@@ -55,7 +55,8 @@ const navItems = [
     icon: <DockIcon size={22} color="#e1306c" />,
     glow: "rgba(225,48,108,0.6)",
     label: "BROCHURE",
-    link: "brochure",
+    link: "/ECHELON.pdf",
+
   },
 ];
 
@@ -110,28 +111,45 @@ const Sidebars = () => {
               key={i}
               onClick={() =>
                 item.link
-                  ? window.open("/ECHELON.pdf", "_blank") // opens or downloads depending on browser
+                  ? window.open(item.link, "_blank")
                   : scrollToSection(item.target)
               }
-              className="flex flex-col items-center transition-all duration-300 group focus:outline-none"
+              className="
+              flex flex-col items-center gap-1 
+              transition-all duration-300 
+              active:scale-95
+            "
             >
               <div
-                className="flex items-center justify-center w-10 h-10 rounded-full
-                bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)]
-                transition-all duration-300 group-hover:scale-110"
+                className="
+      flex items-center justify-center
+      w-11 h-11 
+      rounded-xl
+      bg-white/5 
+      border border-white/10
+      transition-all duration-300
+    "
                 style={{
-                  boxShadow: `0 0 8px ${item.glow}`,
+                  color: item.icon.props.color,
+                  boxShadow: `0 0 10px ${item.glow}`,
                 }}
               >
                 {item.icon}
               </div>
+
               <span
-                className="text-[10px] mt-1 tracking-wider font-medium group-hover:scale-105"
-                style={{ color: item.icon.props.color }}
+                className="
+                text-[8px] sm:text-[10px] 
+                font-semibold text-white/80 tracking-wide 
+                leading-2.5 text-center
+                wrap-break-word
+              "
+               
               >
                 {item.label}
               </span>
             </button>
+
           ))}
         </div>
       </div>
